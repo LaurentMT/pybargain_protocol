@@ -94,13 +94,13 @@ def _get_blockr_host(network):
 
 def blockr_pushtx(tx, network=MAINNET):
     if not re.match('^[0-9a-fA-F]*$', tx): tx = tx.encode('hex')
-    url = 'https://%s/api/v1/tx/push' % _get_blockr_host(network)
+    url = 'http://%s/api/v1/tx/push' % _get_blockr_host(network)
     return make_request(url, '{"hex":"%s"}' % tx)
 
 
 def blockr_fetchtx(txhash, network=MAINNET):
     if not re.match('^[0-9a-fA-F]*$',txhash): txhash = txhash.encode('hex')
-    url = 'https://%s/api/v1/tx/raw/' % _get_blockr_host(network)
+    url = 'http://%s/api/v1/tx/raw/' % _get_blockr_host(network)
     try:
         jsondata = json.loads(make_request(url + txhash))
         return jsondata['data']['tx']['hex']
@@ -119,7 +119,7 @@ def blockr_unspent(network=MAINNET, *args):
     if len(args) == 0: return []
     elif isinstance(args[0],list): addrs = args[0]
     else: addrs = args
-    url = 'https://%s/api/v1/address/unspent/' % _get_blockr_host(network)
+    url = 'http://%s/api/v1/address/unspent/' % _get_blockr_host(network)
     res = make_request(url+','.join(addrs))
     data = json.loads(res)['data']
     o = []

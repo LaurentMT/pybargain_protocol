@@ -110,7 +110,7 @@ def check_tx_signatures(tx, network = MAINNET):
         network = network used
     '''
     magicbytes = MAGIC_BYTES_TESTNET if network == TESTNET else MAGIC_BYTES_MAINNET
-    # Gets the tx in serialized/desrialized forms
+    # Gets the tx in serialized/deserialized forms
     if type(tx) == dict:
         txjson = tx 
         txser = serialize(tx)
